@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+  <title>Tech AI Mobile App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Mukta&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Mukta', sans-serif;
+    }
+    a.feature-card,
+.footer a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+    body {
+      background: #f4f4f4;
+      color: #333;
+      max-width: 480px;
+      margin: auto;
+      overflow-x: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      max-width: 480px;
+      height: 60px;
+      background-color: #2e7d32;
+      color: white;
+      display: flex;
+      align-items: center;
+      padding: 0 15px;
+      gap: 20px;
+      z-index: 10;
+    }
+
+    .menu-icon {
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .app-title {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 60px;
+      left: -260px;
+      width: 260px;
+      height: 100%;
+      background-color: #388e3c;
+      color: white;
+      padding: 20px;
+      transition: left 0.3s ease-in-out;
+      z-index: 20;
+    }
+
+    .sidebar.open {
+      left: 0;
+    }
+
+    .avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-image: url('https://cdn-icons-png.flaticon.com/512/1995/1995574.png');
+      background-size: cover;
+      margin-bottom: 10px;
+    }
+
+    .username {
+      font-size: 16px;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .sidebar-menu li {
+      margin: 20px 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sidebar-menu li:hover {
+      background-color: #81c784;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .sidebar-menu li i {
+      font-size: 20px;
+    }
+
+    /* Welcome Section */
+    .welcome-section {
+      padding: 10px;
+      color: rgb(0, 0, 0);
+      margin-top: 60px; /* Reduced margin to remove space above the slider */
+      text-align: center;
+    }
+
+    .welcome-text {
+      font-size: 15px;
+      font-weight: bold;
+      display: flex;
+      gap: 3px;
+    }
+
+    /* Slider */
+    .slider {
+      width: 100%;
+      overflow: hidden;
+      margin: 0;
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slide {
+      min-width: 100%;
+      height: 100px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* Features */
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 0 10px;
+      margin-top: 20px;
+    }
+
+    .feature-card {
+      flex: 1 1 calc(50% - 10px);
+      background-color: #e8f5e9;
+      padding: 10px;
+      text-align: center;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      font-size: 14px;
+      height: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .feature-card i {
+      font-size: 18px;
+      color: #2e7d32;
+      margin-bottom: 5px;
+    }
+
+    .feature-card span {
+      font-size: 12px;
+      display: block;
+      text-align: center;
+    }
+
+    /* Footer */
+    .footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      max-width: 480px;
+      height: 60px;
+      background-color: #2e7d32;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      color: white;
+      z-index: 10;
+    }
+
+    .footer button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .footer i {
+      font-size: 18px;
+    }
+
+    @media (min-width: 481px) {
+      body {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- App Container -->
+  <div id="app">
+
+    <!-- Navbar -->
+    <div class="navbar">
+      <div class="menu-icon" onclick="toggleSidebar()">☰</div>
+      <div class="app-title">Tech AI</div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="user-info">
+        <div class="avatar"></div>
+        <div class="username">Farmer</div>
+      </div>
+      <ul class="sidebar-menu">
+        <li><i class="fas fa-user"></i> Profile</li>
+        <li><i class="fas fa-cogs"></i> Settings</li>
+        <li><i class="fas fa-info-circle"></i> About App</li>
+        <li onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</li>
+      </ul>
+    </div>
+
+    <!-- Welcome Section -->
+    <div class="welcome-section">
+      <div class="welcome-text">
+        <i class="fas fa-tractor"></i> <!-- Added tractor icon -->
+        Welcome, AI Farmer
+      </div>
+    </div>
+
+    <!-- Slider -->
+    <div class="slider">
+      <div class="slides" id="slides">
+        <div class="slide" style="background-image: url('bg_1.jpg');"></div>
+        <div class="slide" style="background-image: url('bg_2.png');"></div>
+        <div class="slide" style="background-image: url('bg_3.jpg');"></div>
+      </div>
+    </div>
+
+<!-- Features -->
+<div class="features">
+  <a class="feature-card" href="pest-alerts.html"><i class="fas fa-bug"></i><span>Pest Alerts</span></a>
+  <a class="feature-card" href="pesticide-recommendations.html"><i class="fas fa-spray-can"></i><span>Pesticide Recommendations</span></a>
+  <a class="feature-card" href="fertilizer-recommendations.html"><i class="fas fa-leaf"></i><span>Fertilizer Recommendations</span></a>
+  <a class="feature-card" href="upload-soil-reports.html"><i class="fas fa-upload"></i><span>Upload Soil Testing Reports</span></a>
+  <a class="feature-card" href="detect-diseases.html"><i class="fas fa-virus"></i><span>Detect Diseases</span></a>
+  <a class="feature-card" href="https://rudrauserone.github.io/water/"><i class="fas fa-water"></i><span>Water Management</span></a>
+  <a class="feature-card" href="https://rudrauserone.github.io/fertlizershop/"><i class="fas fa-store"></i><span>Nearby Fertilizer Stores</span></a>
+  <a class="feature-card" href="https://rudrauserone.github.io/soiltest/"><i class="fas fa-flask"></i><span>Nearby Soil Testing Labs</span></a>
+  <a class="feature-card" href="https://rudrauserone.github.io/weather/"><i class="fas fa-cloud-sun"></i><span>Weather Updates</span></a>
+  <a class="feature-card" href="https://rudrauserone.github.io/farmercoummunity/"><i class="fas fa-users"></i><span>Farmer Community</span></a>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <a href="index.html"><button><i class="fas fa-home"></i><span>Home</span></button></a>
+  <a href="https://admirable-melomakarona-aebec2.netlify.app/"><button><i class="fas fa-robot"></i><span>FarmBot</span></button></a>
+</div>
+
+
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('open');
+    }
+
+    function logout() {
+      // Redirect to index.html page on logout
+      window.location.href = 'index.html';
+    }
+
+    // Slider functionality
+    let currentIndex = 0;
+    const slides = document.getElementById('slides');
+    const totalSlides = slides.children.length;
+
+    function showSlide(index) {
+      slides.style.transform = `translateX(-${index * 100}%)`;
+    }
+
+    function autoSlide() {
+      currentIndex = (currentIndex + 1) % totalSlides;
+      showSlide(currentIndex);
+    }
+
+    setInterval(autoSlide, 7000);
+  </script>
+
+</body>
+</html>
